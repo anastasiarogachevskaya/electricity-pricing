@@ -4,14 +4,12 @@ import React, { useEffect, useState } from 'react';
 import PriceText from './components/PriceText';
 import { getElectricityPrice } from './api';
 
-const START_DEFAULT = { x: 0.5, y: 0 };
-const END_DEFAULT = { x: 0.5, y: 1 };
-const START_HORIZONTAL = { x: 0, y: 0.5 };
-const END_HORIZONTAL = { x: 1, y: 0.5 };
-const GRADIENT_COLORS = ["#fdf4c9", "#fbcdf2", "#e8befa", "#acbfff", "#bbf3bf", "#fdf4c9", "#fbcdf2"];
-const GRADIENT_LOCATIONS = [0, 0.2, 0.4, 0.6, 0.8, 1, 1];
-const MOVEMENT = GRADIENT_LOCATIONS[1] / 20;
-const INTERVAL = 30;
+const START_DEFAULT = { x: 1, y: 1 };
+const END_DEFAULT = { x: 0, y: 0 };
+const GRADIENT_COLORS = ["#A96C83", "#6CA992", "#A96C83", "#6CA992", "#A96C83", "#6CA992"];
+const GRADIENT_LOCATIONS = [0, 0.2, 0.4, 0.6, 0.8, 1];
+const MOVEMENT = GRADIENT_LOCATIONS[1] / 30;
+const INTERVAL = 50;
 
 let timeout = undefined;
 
