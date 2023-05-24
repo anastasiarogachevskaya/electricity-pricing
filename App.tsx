@@ -1,36 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { getElectricityPrice } from './api';
-import Wrapper from './components/Wrapper';
-import PriceText from './components/PriceText';
-import DateText from './components/DateText';
-import StyledImage from './components/StyledImage';
-import formatDate from './utils/formatDate';
+import React from 'react';
+import {
+  useFonts,
+  NanumGothic_400Regular,
+  NanumGothic_700Bold,
+  NanumGothic_800ExtraBold,
+} from '@expo-google-fonts/nanum-gothic';
+import * as SplashScreen from 'expo-splash-screen';
+import LoadingScreen from './components/LoadingScreen';
+import MainScreen from './components/MainScreen';
 
-function App() {
-  const [price, setPrice] = useState(null);
-  const [currentDate, setCurrentDate] = useState(new Date());
+export default function App() {
+  let [fontsLoaded] = useFonts({
+    NanumGothic_400Regular,
+    NanumGothic_700Bold,
+    NanumGothic_800ExtraBold,
+  });
 
-  useEffect(() => {
-    const fetchPrice = async () => {
-      const date = currentDate.toISOString().split('T')[0];
-      const hour = currentDate.getHours();
-
-      const data = await getElectricityPrice(date, hour);
-      setPrice(data?.price);
+  React.useEffect(() => {
+    const hideSplashScreen = async () => {
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+      }
     };
 
-    fetchPrice();
-  }, [currentDate]);
+    hideSplashScreen();
+  }, [fontsLoaded]);
 
-  return (
-    <Wrapper price={price}>
-      <DateText>{formatDate(currentDate)}</DateText>
-      {price < 5 && <StyledImage source={require('./assets/green-battery.png')} />}
-      {price >= 5 && price < 10 && <StyledImage source={require('./assets/orange-battery.png')} />}
-      {price >= 10 && <StyledImage source={require('./assets/red-battery.png')} />}
-      <PriceText>{price}</PriceText>
-    </Wrapper>
-  );
+  if (!fontsLoaded) {
+    return <LoadingScreen />;
+  }
+
+  return <MainScreen />;
 }
-
-export default App;
