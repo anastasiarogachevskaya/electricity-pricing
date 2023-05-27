@@ -1,71 +1,43 @@
+// WelcomeScreen.tsx
+
 import React, { useState } from 'react';
 import { Container } from './Container';
-import { Heading1,Heading2,  StyledInput, StyledInputRange, TextContainer, PriceContainer} from './Typography';
+import { Heading1, PriceContainer } from './Typography';
 import CustomButton from './CustomButton';
+import UserNameInput from './UserNameInput';
+import PriceLimitsInputs from './PriceLimitsInputs';
 
-const WelcomeScreen = ({ onSaveUserName }) => {
+interface WelcomeScreenProps {
+  onSaveUserName: (userName: string) => void;
+}
+
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSaveUserName }) => {
   const [userName, setUserName] = useState('');
   const [cautionLimit, setCautionLimit] = useState('');
   const [dangerLimit, setDangerLimit] = useState('');
 
-  const handleLimitChange = (text, limitType) => {
-    let value = parseInt(text);
-    if (isNaN(value) || value > 50) {
-      value = 50;
-    }
-  
+  const handleLimitChange = (value: string, limitType: 'caution' | 'danger') => {
     if (limitType === 'caution') {
-      setCautionLimit(value.toString());
+      setCautionLimit(value);
     } else if (limitType === 'danger') {
-      setDangerLimit(value.toString());
+      setDangerLimit(value);
     }
   };
-  
 
   const handleSave = () => {
-    // Handle save action here
-    console.log('User name:', userName);
+    onSaveUserName(userName);
   };
 
   return (
     <Container>
-      <TextContainer>
-        <Heading1>Hey, </Heading1>
-        <StyledInput
-          value={userName}
-          onChangeText={setUserName}
-          placeholder="User"
-          id="userName"
-          placeholderTextColor="#666"
-        />
-      </TextContainer>
-
+      <UserNameInput value={userName} onChangeText={setUserName} />
       <PriceContainer>
-      <Heading1>Pick your price sensitivity limits:</Heading1>
-      <TextContainer>
-        <Heading2>Caution Zone: </Heading2>
-        <StyledInputRange
-          value={cautionLimit.toString()}
-          onChangeText={(text) => handleLimitChange(text, 'caution')}
-          id="cautionLimit"
-          placeholder="10"
-          placeholderTextColor="#666"
-          keyboardType="numeric"
+        <Heading1>Pick your price sensitivity limits:</Heading1>
+        <PriceLimitsInputs
+          cautionLimit={cautionLimit}
+          dangerLimit={dangerLimit}
+          onLimitChange={handleLimitChange}
         />
-        <Heading2>¢</Heading2>
-      </TextContainer>
-      <TextContainer>
-        <Heading2>Danger Zone: </Heading2>
-        <StyledInputRange
-          value={dangerLimit.toString()}
-          onChangeText={(text) => handleLimitChange(text, 'danger')}
-          id="dangerLimit"
-          placeholder="20"
-          placeholderTextColor="#666"
-          keyboardType="numeric"
-        />
-        <Heading2>¢</Heading2>
-      </TextContainer>
       </PriceContainer>
       <CustomButton title="Save" onPress={handleSave} />
     </Container>

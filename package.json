@@ -2,7 +2,6 @@
   "dependencies": {
     "@expo-google-fonts/nanum-gothic": "^0.2.3",
     "@expo/webpack-config": "^18.0.1",
-    "@react-native-community/slider": "^4.4.2",
     "axios": "^1.4.0",
     "expo": "^48.0.7",
     "expo-font": "~11.1.1",
