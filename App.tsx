@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useFonts,
   NanumGothic_400Regular,
@@ -8,15 +8,18 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import LoadingScreen from './components/LoadingScreen';
 import MainScreen from './components/MainScreen';
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     NanumGothic_400Regular,
     NanumGothic_700Bold,
     NanumGothic_800ExtraBold,
   });
 
-  React.useEffect(() => {
+  const [isFirstTime, setIsFirstTime] = useState(true);
+
+  useEffect(() => {
     const hideSplashScreen = async () => {
       if (fontsLoaded) {
         await SplashScreen.hideAsync();
@@ -26,9 +29,19 @@ export default function App() {
     hideSplashScreen();
   }, [fontsLoaded]);
 
+  const handleSaveUserName = (userName) => {
+    // Handle saving the user name here
+    console.log('User name:', userName);
+    setIsFirstTime(false);
+  };
+
   if (!fontsLoaded) {
     return <LoadingScreen />;
   }
 
-  return <MainScreen />;
+  return isFirstTime ? (
+    <WelcomeScreen onSaveUserName={handleSaveUserName} />
+  ) : (
+    <MainScreen />
+  );
 }
