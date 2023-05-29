@@ -8,7 +8,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import LoadingScreen from './components/LoadingScreen';
 import MainScreen from './components/MainScreen';
-import WelcomeScreen from './components/WelcomeScreen/SettingsScreen';
+import WelcomeScreen from './components/SettingsScreen/SettingsScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,14 +30,9 @@ export default function App() {
     hideSplashScreen();
   }, [fontsLoaded]);
 
-  const handleSaveUserName = (userName) => {
-    // Handle saving the user name here
-    console.log('User name:', userName);
-    setIsFirstTime(false);
-  };
-
-  const handleToggleWelcomeScreen = () => {
+  const handleToggleSettingsScreen = () => {
     setShowWelcomeScreen((prevValue) => !prevValue);
+    setIsFirstTime(false);
   };
 
   if (!fontsLoaded) {
@@ -46,7 +41,7 @@ export default function App() {
 
   if (isFirstTime || showWelcomeScreen) {
     return (
-      <WelcomeScreen onSaveUserName={handleSaveUserName} onClose={handleToggleWelcomeScreen} />
+      <WelcomeScreen onClose={handleToggleSettingsScreen} />
     );
   }
 

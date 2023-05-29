@@ -6,13 +6,15 @@ const Wrapper = styled.SafeAreaView`
   align-items: center;
   flex-direction: column;
   background-color: ${props => {
-    if (props.price <= 0) {
+    const { price, cautionLimit, dangerLimit } = props;
+    
+    if (price <= 0) {
       return '#f0ccf5';
-    } else if (props.price > 0 && props.price < 5) {
+    } else if (price > 0 && price < cautionLimit) {
       return '#b9ef9c';
-    } else if (props.price >= 5 && props.price < 10) {
+    } else if (price >= cautionLimit && price < dangerLimit) {
       return '#FF885A';
-    } else 
+    } else {
       return '#ed8185';
     }
   }};
