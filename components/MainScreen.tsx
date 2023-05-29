@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import formatDate from '../utils/formatDate';
 import { View } from 'react-native';
-import WelcomeScreen from './WelcomeScreen/WelcomeScreen';
+import WelcomeScreen from './WelcomeScreen/SettingsScreen';
 import { SettingsButton } from './SettingsButton';
 import Overlay from './Overlay';
 

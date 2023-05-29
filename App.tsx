@@ -8,7 +8,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import LoadingScreen from './components/LoadingScreen';
 import MainScreen from './components/MainScreen';
-import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import WelcomeScreen from './components/WelcomeScreen/SettingsScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
