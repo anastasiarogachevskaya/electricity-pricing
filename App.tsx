@@ -18,6 +18,7 @@ export default function App() {
   });
 
   const [isFirstTime, setIsFirstTime] = useState(true);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
 
   useEffect(() => {
     const hideSplashScreen = async () => {
@@ -35,13 +36,24 @@ export default function App() {
     setIsFirstTime(false);
   };
 
+  const handleToggleWelcomeScreen = () => {
+    setShowWelcomeScreen((prevValue) => !prevValue);
+  };
+
   if (!fontsLoaded) {
     return <LoadingScreen />;
   }
 
-  return isFirstTime ? (
-    <WelcomeScreen onSaveUserName={handleSaveUserName} />
-  ) : (
-    <MainScreen />
+  if (isFirstTime || showWelcomeScreen) {
+    return (
+      <WelcomeScreen onSaveUserName={handleSaveUserName} onClose={handleToggleWelcomeScreen} />
+    );
+  }
+
+  return (
+    <>
+      <MainScreen />
+      {/* Add your setting button here to toggle the WelcomeScreen */}
+    </>
   );
 }

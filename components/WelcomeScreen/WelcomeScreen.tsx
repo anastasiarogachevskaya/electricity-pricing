@@ -1,5 +1,3 @@
-// WelcomeScreen.tsx
-
 import React, { useState } from 'react';
 import { Container } from './Container';
 import { Heading1, PriceContainer } from './Typography';
@@ -9,9 +7,10 @@ import PriceLimitsInputs from './PriceLimitsInputs';
 
 interface WelcomeScreenProps {
   onSaveUserName: (userName: string) => void;
+  onClose: () => void;
 }
 
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSaveUserName }) => {
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSaveUserName, onClose }) => {
   const [userName, setUserName] = useState('');
   const [cautionLimit, setCautionLimit] = useState('');
   const [dangerLimit, setDangerLimit] = useState('');
@@ -26,6 +25,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSaveUserName }) => {
 
   const handleSave = () => {
     onSaveUserName(userName);
+    onClose(); // Close the WelcomeScreen after saving
   };
 
   return (
