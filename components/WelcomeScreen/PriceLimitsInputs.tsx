@@ -7,7 +7,7 @@ const PriceLimitsInputs = ({ cautionLimit, dangerLimit, onLimitChange }) => {
   return (
     <>
       <TextContainer>
-        <Heading2>Caution Zone: </Heading2>
+        <Heading2>Caution Zone </Heading2>
         <StyledInputRange
           value={cautionLimit}
           onChangeText={(text) => onLimitChange(text, 'caution')}
@@ -19,7 +19,7 @@ const PriceLimitsInputs = ({ cautionLimit, dangerLimit, onLimitChange }) => {
         <Heading2>¢</Heading2>
       </TextContainer>
       <TextContainer>
-        <Heading2>Danger Zone: </Heading2>
+        <Heading2>Danger Zone </Heading2>
         <StyledInputRange
           value={dangerLimit}
           onChangeText={(text) => onLimitChange(text, 'danger')}

@@ -4,11 +4,13 @@ export const Heading1 = styled.Text`
   font-size: 24px;
   font-family: 'NanumGothic_700Bold';
   margin-bottom: 20px;
+  text-transform: lowercase;
 `;
 
 export const Heading2 = styled.Text`
   font-size: 20px;
   font-family: 'NanumGothic_700Bold';
+  text-transform: lowercase;
 `;
 
 export const StyledInput = styled.TextInput`
@@ -16,6 +18,7 @@ export const StyledInput = styled.TextInput`
   font-family: 'NanumGothic_700Bold';
   text-decoration-line: underline;
   margin-bottom: 16px;
+  text-transform: lowercase;
 `;
 export const StyledInputRange = styled(StyledInput)`
   width: 30px;

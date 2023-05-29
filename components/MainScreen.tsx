@@ -14,6 +14,7 @@ export default function MainScreen() {
 
       const data = await getElectricityPrice(date, hour);
       setPrice(data?.price);
+      // setPrice(-1.000);
     };
 
     fetchPrice();

@@ -8,7 +8,7 @@ const UserNameInput = ({ value, onChangeText }) => {
       <StyledInput
         value={value}
         onChangeText={onChangeText}
-        placeholder="User"
+        placeholder="user"
         id="userName"
         placeholderTextColor="#666"
       />
